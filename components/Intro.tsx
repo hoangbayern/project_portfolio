@@ -52,7 +52,7 @@ export default function Intro() {
       </motion.h1>
 
       <motion.div
-        className="flex items-center justify-center gap-2 flex-col sm:flex-row font-medium text-lg"
+        className="flex items-center justify-center gap-3 flex-col sm:gap-2 sm:flex-row font-medium text-lg"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
       >
