@@ -6,6 +6,6 @@ type Props = {
 
 export default function SectionHeading({children}: Props) {
   return (
-    <h2 className='font-bold text-3xl capitalize mb-8'>{children}</h2>
+    <h2 className='font-bold text-3xl capitalize mb-8 text-center'>{children}</h2>
   )
 }

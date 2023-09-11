@@ -1,6 +1,8 @@
 import About from "@/components/About";
 import Divider from "@/components/Divider";
 import Intro from "@/components/Intro";
+import Project from "@/components/Project";
+import Projects from "@/components/Projects";
 
 export default function Home() {
   return (
@@ -8,6 +10,8 @@ export default function Home() {
       <Intro />
       <Divider />
       <About />
+      <Projects />
+      <Project />
     </main>
   )
 }
