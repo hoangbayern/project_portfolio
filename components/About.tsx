@@ -3,13 +3,17 @@
 import React from "react";
 import SectionHeading from "./Heading-h2";
 import { motion } from "framer-motion";
+import { useMenuInView } from "@/lib/hooks";
 
 export default function About() {
+  const {ref} = useMenuInView("About", 0.8);
+
   return (
-    <motion.section className="text-center leading-8 max-w-[45rem] mb-28 sm:mb-40"
+    <motion.section ref={ref} className="text-center leading-8 max-w-[45rem] mb-28 sm:mb-40 scroll-mt-28"
     initial={{ y: 100, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
-    transition={{ delay: 0.12 }}>
+    transition={{ delay: 0.12 }}
+    id="about">
       
       <SectionHeading>About me</SectionHeading>
 

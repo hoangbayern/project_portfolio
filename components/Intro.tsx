@@ -6,19 +6,21 @@ import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
 import { BsArrowRight, BsGithub, BsLinkedin } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
+import { useMenuInView } from "@/lib/hooks";
 
 export default function Intro() {
   const controls = useAnimation();
+  const {ref} = useMenuInView("Home", 0.7);
 
   useEffect(() => {
     controls.start({
       opacity: 1,
       scale: 1,
     });
-  }, []);
+  }, [controls]);
 
   return (
-    <section className="text-center mb-28 max-w-[50rem] sm:mb-0">
+    <section ref={ref} className="text-center mb-28 max-w-[50rem] sm:mb-0 scroll-mt-[100rem]" id="home">
       <div className="flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
