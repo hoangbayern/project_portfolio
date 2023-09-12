@@ -1,21 +1,41 @@
+"use client"
+
 import { projectsData } from "@/lib/data";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useMediaQuery } from "@mui/material";
 
 type ProjectProps = (typeof projectsData)[number];
 
 export default function Project(props: ProjectProps) {
   const { title, description, tags, imageUrl } = props;
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["0 1", "1.33 1"],
+  });
+  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
+
+  const isMobile = useMediaQuery('(max-width: 600px)');
+
   return (
     <>
       {title ? (
-        <section
+        <motion.section ref={ref}
           className="group bg-gray-100 max-w-[42rem] overflow-hidden border
                border-black/5 rounded-lg relative sm:h-[20rem] mb-3 sm:mb-8 last:mb-0
-               shadow-2xl cursor-pointer hover:bg-gray-300 transition" 
+               shadow-2xl cursor-pointer hover:bg-gray-300 transition"
+               style={{
+                scale: scaleProgress,
+                opacity: opacityProgress
+               }}
         >
-          <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pt-10 sm:pr-2 sm:max-w-[50%] h-full
-          flex flex-col">
+          <div
+            className="pt-4 pb-7 px-5 sm:pl-10 sm:pt-10 sm:pr-2 sm:max-w-[50%] h-full
+          flex flex-col"
+          >
             <h3 className="text-2xl font-semibold">{title}</h3>
             <p className="mt-2 leading-relaxed">{description}</p>
             {tags ? (
@@ -32,7 +52,7 @@ export default function Project(props: ProjectProps) {
               </ul>
             ) : null}
           </div>
-          {imageUrl ? (
+          {imageUrl && !isMobile ? (
             <Image
               src={imageUrl}
               alt="Image Project"
@@ -41,7 +61,7 @@ export default function Project(props: ProjectProps) {
               group-hover:-translate-x-3 group-hover:-translate-y-3 group-hover:-rotate-3 transition"
             />
           ) : null}
-        </section>
+        </motion.section>
       ) : null}
     </>
   );
